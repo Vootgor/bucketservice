@@ -1,4 +1,4 @@
-package com.bikebuilder.bucketservice.adapter.out.persistence
+package com.bikebuilder.bucketservice.domain.model
 
 import java.time.Instant
 import java.util.UUID
