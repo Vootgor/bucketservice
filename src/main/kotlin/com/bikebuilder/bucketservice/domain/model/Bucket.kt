@@ -1,5 +1,6 @@
 package com.bikebuilder.bucketservice.domain.model
 
+import com.bikebuilder.bucketservice.application.port.`in`.command.BucketCreateCommand
 import java.time.Instant
 import java.util.UUID
 
@@ -9,4 +10,22 @@ data class Bucket(
     var updatedAt: Instant?,
     var items: MutableList<BucketItem>
 ) {
+
+    companion object {
+        fun fromCommand(command: BucketCreateCommand): Bucket {
+            return Bucket(
+                ownerId = command.ownerId,
+                createdAt = Instant.now(),
+                updatedAt = null,
+                items = mutableListOf(
+                    BucketItem(
+                        productId = command.productId,
+                        name = command.name,
+                        price = command.price,
+                        quantity = command.quantity
+                    )
+                )
+            )
+        }
+    }
 }
