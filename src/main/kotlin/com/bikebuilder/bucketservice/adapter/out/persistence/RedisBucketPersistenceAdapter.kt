@@ -5,6 +5,7 @@ import com.bikebuilder.bucketservice.application.port.out.SaveBucketPort
 import com.bikebuilder.bucketservice.domain.model.Bucket
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.stereotype.Component
+import java.time.Duration
 import java.util.UUID
 
 @Component
@@ -13,7 +14,10 @@ class RedisBucketPersistenceAdapter(
 ) : SaveBucketPort, GetBucketPort {
 
     override fun save(bucket: Bucket): Bucket {
-        redisTemplate.opsForValue().set(bucket.ownerId.toString(), bucket)
+        redisTemplate.opsForValue().set(
+            bucket.ownerId.toString(),
+            bucket,
+            Duration.ofDays(7))
         return bucket
     }
 

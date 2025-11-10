@@ -12,7 +12,7 @@ data class Bucket(
 ) {
 
     companion object {
-        fun fromCommand(command: BucketCreateCommand): Bucket {
+        fun create(command: BucketCreateCommand): Bucket {
             return Bucket(
                 ownerId = command.ownerId,
                 createdAt = Instant.now(),

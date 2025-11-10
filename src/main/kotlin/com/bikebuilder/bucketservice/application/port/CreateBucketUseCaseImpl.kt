@@ -13,7 +13,7 @@ class CreateBucketUseCaseImpl(
 ) : CreateBucketUseCase {
 
     override fun createBucket(command: BucketCreateCommand): BucketResponse {
-        val bucket = Bucket.fromCommand(command)
+        val bucket = Bucket.create(command)
         val saved = saveBucketPort.save(bucket)
         return BucketResponse.fromBucket(saved)
     }
