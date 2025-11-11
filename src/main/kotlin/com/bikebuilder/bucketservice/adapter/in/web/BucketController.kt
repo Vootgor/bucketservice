@@ -32,8 +32,7 @@ class BucketController(
 
     @GetMapping("/{ownerId}")
     fun getBucket(@PathVariable ownerId: UUID): BucketResponse {
-        val response = getBucketUseCase.getBucket(ownerId)
-        return response
+        return getBucketUseCase.getBucket(ownerId)
     }
 }
 

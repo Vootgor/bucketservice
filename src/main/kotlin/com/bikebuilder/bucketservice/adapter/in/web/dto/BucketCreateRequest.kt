@@ -12,6 +12,12 @@ data class BucketCreateRequest(
     val quantity: Int
 ) {
     fun toCommand(ownerId: UUID): BucketCreateCommand {
-        return BucketCreateCommand(ownerId,productId,name,price,quantity)
+        return BucketCreateCommand(
+            ownerId = ownerId,
+            productId = productId,
+            name = name,
+            price = price,
+            quantity = quantity
+        )
     }
 }
