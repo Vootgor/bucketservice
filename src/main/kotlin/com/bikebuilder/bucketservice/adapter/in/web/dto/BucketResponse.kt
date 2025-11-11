@@ -11,7 +11,7 @@ data class BucketResponse(
     val items: List<BucketItemResponse>
 ) {
     companion object {
-        fun from(bucket: Bucket): BucketResponse =
+        fun fromBucket(bucket: Bucket): BucketResponse =
             BucketResponse(
                 bucket.ownerId,
                 bucket.createdAt,
