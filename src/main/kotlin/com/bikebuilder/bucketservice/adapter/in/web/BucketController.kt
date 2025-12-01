@@ -1,8 +1,8 @@
 package com.bikebuilder.bucketservice.adapter.`in`.web
 
-import com.bikebuilder.bucketservice.adapter.`in`.CreateBucketUseCase
+import com.bikebuilder.bucketservice.adapter.`in`.CreateOrUpdateBucketUseCase
 import com.bikebuilder.bucketservice.adapter.`in`.GetBucketUseCase
-import com.bikebuilder.bucketservice.adapter.`in`.web.dto.BucketCreateRequest
+import com.bikebuilder.bucketservice.adapter.`in`.web.dto.BucketRequest
 import com.bikebuilder.bucketservice.adapter.`in`.web.dto.BucketResponse
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -16,18 +16,17 @@ import java.util.UUID
 @RestController
 @RequestMapping("api/bucket")
 class BucketController(
-    private val createBucketUseCase: CreateBucketUseCase,
+    private val createOrUpdateBucketUseCase: CreateOrUpdateBucketUseCase,
     private val getBucketUseCase: GetBucketUseCase
 ) {
 
     @PostMapping("/")
     fun createBucket(
         @RequestHeader("X-Request-ID") id: UUID,
-        @RequestBody request: BucketCreateRequest
+        @RequestBody request: BucketRequest
     ): BucketResponse {
-
         val command = request.toCommand(id)
-        return createBucketUseCase.createBucket(command)
+        return createOrUpdateBucketUseCase.createBucket(command)
     }
 
     @GetMapping("/{ownerId}")
@@ -37,7 +36,6 @@ class BucketController(
 }
 
 /*
-2) getBucket
 3) addProduct
 4) removeProduct
 5) createOrder*/
