@@ -11,5 +11,5 @@ class RedisLockConfig(
 ) {
     @Bean
     fun redisLockRegistry(): RedisLockRegistry =
-        RedisLockRegistry(redisConnectionFactory, "cart-locks", 10_000)
+        RedisLockRegistry(redisConnectionFactory, "bucket-locks", 10_000)
 }

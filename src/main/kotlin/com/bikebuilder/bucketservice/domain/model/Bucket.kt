@@ -30,13 +30,12 @@ data class Bucket(
     }
 
     fun update(command: BucketCreateOrUpdateCommand) {
-        val existing = items.find { items -> items.productId == command.productId }
-        if (existing != null) {
-            val updated = existing.copy(quantity = existing.quantity + command.quantity)
-            items[items.indexOf(existing)] = updated
-        }else{
-            items.add(BucketItem.parseItemData(command))
-        }
+        items.find { item -> item.productId == command.productId }
+            ?.also {
+                val updated = it.copy(quantity = it.quantity + command.quantity)
+                items[items.indexOf(it)] = updated
+            }
+            ?: items.add(BucketItem.parseItemData(command))
         updatedAt = Instant.now()
     }
 }

@@ -31,13 +31,6 @@ class RedisBucketPersistenceAdapter(
         return bucket
     }
 
-    override fun findByOwnerId(ownerId: UUID): Bucket? {
-        val lock = lockRegistry.obtain(ownerId.toString())
-        lock.lock()
-        try {
-           return redisTemplate.opsForValue().get(ownerId.toString())
-        }finally {
-            lock.unlock()
-        }
-    }
+    override fun findByOwnerId(ownerId: UUID): Bucket? =
+            redisTemplate.opsForValue().get(ownerId.toString())
 }
